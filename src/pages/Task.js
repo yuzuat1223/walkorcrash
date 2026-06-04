@@ -46,7 +46,12 @@ const Task = () => {
     {/* 標題區塊 */}
     <div className="title-area">
       <div className="title-main">
-        <FaTasks size={24} color="#2E8B57" />
+        <svg className="user-icon mission-target-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" strokeDasharray="4 2"/>
+          <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M12 2V5M12 19V22M2 12H5M19 12H22" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          <circle cx="12" cy="12" r="1" fill="currentColor"/>
+        </svg>
         <h1>任務抽卡</h1>
       </div>
       <p>橫向檔案瀏覽，點擊中間卡片解鎖技能戰術</p>

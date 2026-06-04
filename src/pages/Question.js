@@ -68,7 +68,9 @@ const Question = () => {
       {/* 標題區塊 */}
       <div className="title-area">
         <div className="title-main">
-          <HiQuestionMarkCircle size={24} color="#8A2BE2" />
+          <div className="user-icon mission-target-icon">
+            <HiQuestionMarkCircle size={24} color="#8A2BE2" />
+          </div>
           <h1>問答題庫</h1>
         </div>
         <p>隨機抽取加密考題，解鎖情報權限</p>

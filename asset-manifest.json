@@ -1,17 +1,24 @@
 {
   "files": {
     "main.css": "/walkorcrash/static/css/main.23ddda5f.css",
-    "main.js": "/walkorcrash/static/js/main.9b0604d9.js",
+    "main.js": "/walkorcrash/static/js/main.60a81f3b.js",
     "static/js/453.ac0a0af3.chunk.js": "/walkorcrash/static/js/453.ac0a0af3.chunk.js",
+    "static/media/s6.png": "/walkorcrash/static/media/s6.57118c9e0d21473b933f.png",
+    "static/media/s1.png": "/walkorcrash/static/media/s1.b591b329b44fad17548a.png",
+    "static/media/s2.png": "/walkorcrash/static/media/s2.a83b77d73f080d1eca48.png",
+    "static/media/s5.png": "/walkorcrash/static/media/s5.1c4a935bf366a0db65d7.png",
+    "static/media/s4.png": "/walkorcrash/static/media/s4.3c07ad805028124e87b4.png",
+    "static/media/s3.png": "/walkorcrash/static/media/s3.855c347c35c8d9f2ef86.png",
+    "static/media/s7.png": "/walkorcrash/static/media/s7.74f4223a37d55a0196b9.png",
     "static/media/logo.png": "/walkorcrash/static/media/logo.be050ea6f69d84cacdc7.png",
     "static/media/logo1.png": "/walkorcrash/static/media/logo1.0cf4dbbecb5be68b286e.png",
     "index.html": "/walkorcrash/index.html",
     "main.23ddda5f.css.map": "/walkorcrash/static/css/main.23ddda5f.css.map",
-    "main.9b0604d9.js.map": "/walkorcrash/static/js/main.9b0604d9.js.map",
+    "main.60a81f3b.js.map": "/walkorcrash/static/js/main.60a81f3b.js.map",
     "453.ac0a0af3.chunk.js.map": "/walkorcrash/static/js/453.ac0a0af3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.23ddda5f.css",
-    "static/js/main.9b0604d9.js"
+    "static/js/main.60a81f3b.js"
   ]
 }

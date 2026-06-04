@@ -14,13 +14,6 @@ import { HiQuestionMarkCircle } from "react-icons/hi";
 import { GiPositionMarker } from "react-icons/gi";
 import './App.css';
 
-// 💡 從 src/pictures/ 引入你的圖片變數（Webpack 會自動處理編譯後的路徑）
-import logoImg from '../pictures/logo.png';
-import logo1Img from '../pictures/logo1.png';
-
-// ==========================================
-// 1. 首頁元件 (Home Component) - 傳入 t 讓文字連動
-// ==========================================
 const Home = ({ t }) => (
   <div className="hero-section">
     {/* <div className="badge">{t.badge}</div> */}
@@ -128,8 +121,8 @@ function App() {
         {/* 手機版頂部工具列 */}
         <header className="mobile-header">
           <div className="mobile-logo">
-            {/* 💡 【修正重點】將原本的字串 "./logo.png" 改為使用上方 import 的圖片變數 {logoImg} */}
-            <img src={logoImg} alt="Logo" />
+            {/* 💡 【修正重點】改成用 require 引入手機版的 logo.png */}
+            <img src={require('./pictures/logo.png')} alt="Logo" />
           </div>
           <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? '✕' : '☰'}
@@ -142,9 +135,9 @@ function App() {
         {/* 側邊欄 */}
         <aside className={`sidebar ${isMenuOpen ? 'open' : ''}`}>
           <div className="logo-area">
-            {/* 💡 【修正重點】將原本的字串 "./logo1.png" 改為使用上方 import 的圖片變數 {logo1Img} */}
+            {/* 💡 【修正重點】改成用 require 引入側邊欄的 logo1.png */}
             <img 
-              src={logo1Img} 
+              src={require('./pictures/logo1.png')} 
               alt="走鐘馬路 Logo" 
               style={{ width: '100%', maxWidth: '180px', height: 'auto', marginBottom: '10px' }} 
             />

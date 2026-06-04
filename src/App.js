@@ -87,7 +87,6 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [language, setLanguage] = useState('zh-TW');
 
-  // 💡 這裡會讀取上方 import 進來的 translations 變數
   const t = translations[language] || {
     title1: "走鐘馬路", title2: "WALK OR CRASH", subtitle: "戰術指揮總部",
     navHome: "首頁", navRules: "規則介紹", navCharacters: "人物圖鑑",
@@ -100,10 +99,14 @@ function App() {
   return (
     <Router>
       <div className="dashboard">
+        {/* 手機版頂部工具列 */}
         <header className="mobile-header">
-          <div className="mobile-logo">
-            <img src={require('./pictures/logo.png')} alt="Logo" />
-          </div>
+          {/* 💡 【修正點】加上 Link 點擊可回到首頁，並點擊時自動關閉可能開啟的選單 */}
+          <Link to="/" onClick={closeMenu} className="mobile-logo-link">
+            <div className="mobile-logo">
+              <img src={require('./pictures/logo.png')} alt="Logo" />
+            </div>
+          </Link>
           <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? '✕' : '☰'}
           </button>
@@ -111,14 +114,18 @@ function App() {
 
         {isMenuOpen && <div className="sidebar-overlay" onClick={closeMenu}></div>}
 
+        {/* 側邊欄 */}
         <aside className={`sidebar ${isMenuOpen ? 'open' : ''}`}>
-          <div className="logo-area">
-            <img 
-              src={require('./pictures/logo1.png')} 
-              alt="走鐘馬路 Logo" 
-              style={{ width: '100%', maxWidth: '180px', height: 'auto', marginBottom: '10px' }} 
-            />
-          </div>
+          {/* 💡 【修正點】加上 Link 讓大 LOGO 點擊時也能點回首頁，並加上 pointer 手勢效果 */}
+          <Link to="/" onClick={closeMenu} style={{ textDecoration: 'none', display: 'block' }}>
+            <div className="logo-area" style={{ cursor: 'pointer' }}>
+              <img 
+                src={require('./pictures/logo1.png')} 
+                alt="走鐘馬路 Logo" 
+                style={{ width: '100%', maxWidth: '180px', height: 'auto', marginBottom: '10px' }} 
+              />
+            </div>
+          </Link>
 
           <nav className="nav-links">
             <NavLink to="/" onClick={closeMenu} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>

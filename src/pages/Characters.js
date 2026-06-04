@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import "./Characters.css";
 
 const characters = [
-  { id: 1, name: "Knight", front: "/pictures/front/C_1A.png", back: "/pictures/back/C_1B.png" },
-  { id: 2, name: "Mage", front: "/pictures/front/C_2A.png", back: "/pictures/back/C_2B.png" },
-  { id: 3, name: "Archer", front: "/pictures/front/C_3A.png", back: "/pictures/back/C_3B.png" },
-  { id: 4, name: "Assassin", front: "/pictures/front/C_4A.png", back: "/pictures/back/C_4B.png" },
-  { id: 5, name: "Priest", front: "/pictures/front/C_5A.png", back: "/pictures/back/C_5B.png" },
-  { id: 6, name: "Dragon", front: "/pictures/front/C_6A.png", back: "/pictures/back/C_6B.png" },
-  { id: 7, name: "Demon", front: "/pictures/front/C_7A.png", back: "/pictures/back/C_7B.png" },
-  { id: 8, name: "Samurai", front: "/pictures/front/C_8A.png", back: "/pictures/back/C_8B.png" },
-  { id: 9, name: "Elf", front: "/pictures/front/C_9A.png", back: "/pictures/back/C_9B.png" },
+  { id: 1, name: "苗真", front: require("../pictures/front/C_1A.png"), back: require("../pictures/back/C_1B.png") },
+  { id: 2, name: "郝任", front: require("../pictures/front/C_2A.png"), back: require("../pictures/back/C_2B.png") },
+  { id: 3, name: "南桓", front: require("../pictures/front/C_3A.png"), back: require("../pictures/back/C_3B.png") },
+  { id: 4, name: "李賀", front: require("../pictures/front/C_4A.png"), back: require("../pictures/back/C_4B.png") },
+  { id: 5, name: "宜思", front: require("../pictures/front/C_5A.png"), back: require("../pictures/back/C_5B.png") },
+  { id: 6, name: "劉鴻", front: require("../pictures/front/C_6A.png"), back: require("../pictures/back/C_6B.png") },
+  { id: 7, name: "酒伊", front: require("../pictures/front/C_7A.png"), back: require("../pictures/back/C_7B.png") },
+  { id: 8, name: "世濟", front: require("../pictures/front/C_8A.png"), back: require("../pictures/back/C_8B.png") },
+  { id: 9, name: "哲興", front: require("../pictures/front/C_9A.png"), back: require("../pictures/back/C_9B.png") },
 ];
 
 export default function Characters() {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink, Navigate, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, NavLink, Navigate, Link } from 'react-router-dom';
 import Rules from './pages/Rules';
 import Characters from './pages/Characters';
 import Task from './pages/Task';
@@ -121,7 +121,7 @@ function App() {
         {/* 手機版頂部工具列 */}
         <header className="mobile-header">
           <div className="mobile-logo">
-            <img src="/logo.png" alt="Logo" />
+            <img src="./logo.png" alt="Logo" />
           </div>
           <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? '✕' : '☰'}

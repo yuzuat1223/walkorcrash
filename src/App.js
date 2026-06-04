@@ -8,6 +8,10 @@ import Map from './pages/Map';
 import { translations } from './i18nData'; 
 import './App.css';
 
+// 💡 【修正點 1】從 src/pictures/ 引入你的圖片（把圖片變成變流數）
+import logoImg from './pictures/logo.png';
+import logo1Img from './pictures/logo1.png';
+
 // ==========================================
 // 1. 首頁元件 (Home Component) - 傳入 t 讓文字連動
 // ==========================================
@@ -121,7 +125,8 @@ function App() {
         {/* 手機版頂部工具列 */}
         <header className="mobile-header">
           <div className="mobile-logo">
-            <img src="./logo.png" alt="Logo" />
+            {/* 💡 【修正點 2】將 src 換成變數 logoImg */}
+            <img src={logoImg} alt="Logo" />
           </div>
           <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? '✕' : '☰'}
@@ -134,8 +139,9 @@ function App() {
         {/* 側邊欄 */}
         <aside className={`sidebar ${isMenuOpen ? 'open' : ''}`}>
           <div className="logo-area">
+            {/* 💡 【修正點 3】將 src 換成變數 logo1Img */}
             <img 
-              src="/logo1.png" 
+              src={logo1Img} 
               alt="走鐘馬路 Logo" 
               style={{ width: '100%', maxWidth: '180px', height: 'auto', marginBottom: '10px' }} 
             />

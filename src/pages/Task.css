@@ -1,0 +1,434 @@
+/* Task.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 頂層容器 */
+.task-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px; 
+}
+
+.title-area {
+  position: absolute;
+  top: 35px;
+  left: 60px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-main {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* Icon 圓角框與文字的間距 */
+  margin-bottom: 16px; /* 拉開標題與下方說明文字的間距 */
+}
+
+.task-container .mission-target-icon {
+  width: 46px;
+  height: 46px;
+  padding: 8px; 
+  background: rgba(255, 145, 0, 0.1); 
+  border-radius: 12px; 
+  color: #ff9100; 
+  box-shadow: inset 0 0 0 1px rgba(255, 145, 0, 0.2); 
+}
+
+/* 中央面板 (高度與寬度放大調整) */
+.task-container .task-main-content {
+  background: radial-gradient(circle at center, #1e2430 0%, #11141a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 80px;
+  width: 90%;
+  max-width: 1300px;
+  height: 80vh;
+  min-height: 560px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 145, 0, 0.2);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75), 
+              inset 0 0 40px rgba(0, 255, 170, 0.01);
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+
+/* 📡 電磁雜訊與撕裂效果動畫 */
+.task-container .task-main-content::before {
+  content: "";
+  position: absolute;
+  top: -50px; left: -50px; right: -50px; bottom: -50px;
+  background-image: 
+    repeating-radial-gradient(rgba(255,255,255,0.04) 0 0.0001%, transparent 0 0.0004%),
+    repeating-linear-gradient(rgba(0,0,0,0.15) 0 1px, transparent 0 4px);
+  background-size: 13px 13px, 100% 4px;
+  mask-image: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0) 80%);
+  -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0) 80%);
+  pointer-events: none;
+  z-index: 1;
+  animation: taskNoiseStatic 0.2s steps(2) infinite;
+}
+
+.task-container .task-main-content::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 145, 0, 0.15) 0 2px,
+    rgba(0, 0, 0, 0.3) 2px 4px
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  animation: taskSignalTear 4s linear infinite;
+}
+
+@keyframes taskNoiseStatic {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(1%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes taskSignalTear {
+  0% { top: -10%; opacity: 0; }
+  16% { top: 25%; opacity: 0.6; }
+  17% { top: 28%; opacity: 0; }
+  65% { top: 65%; opacity: 0.8; }
+  66% { top: 68%; opacity: 0; }
+  100% { top: 120%; opacity: 0; }
+}
+
+/* 🛠️ 橫向排開舞台區：放大寬高 (880px -> 1150px) 提供完整排開空間 */
+.task-container .card-deck-container {
+  position: relative;
+  width: 1150px; 
+  height: 360px; 
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2000px; 
+  z-index: 5;
+}
+
+/* 👈 橫式卡片關鍵精準尺寸：從 280x200 放大到 340x240 */
+.task-container .card-cluster {
+  position: relative;
+  width: 340px; 
+  height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.task-container .card-cluster.ready,
+.task-container .card-cluster.result {
+  width: 100%; 
+}
+
+/* 卡片外殼 - 處理滑行、排開動畫的核心 */
+.task-container .deck-card-wrapper {
+  position: absolute;
+  width: 340px; 
+  height: 240px; 
+  transform-origin: center center;
+  /* 當從 shuffling 切換到 ready 時，觸發流暢的左右滑開特效 */
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.5s ease, 
+              z-index 0s linear; 
+}
+
+/* 當進入 ready 狀態時，為卡片加入一記流暢的「由內向外滑動展開」的動態氛圍 */
+.task-container .card-cluster.ready .deck-card-wrapper {
+  animation: cardSpreadEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--card-index) * 0.02s) backwards;
+}
+
+@keyframes cardSpreadEntry {
+  from {
+    transform: translate(0px, 10px) scale(0.9);
+    opacity: 0.5;
+  }
+}
+
+/* 3D 翻轉結構 */
+.task-container .card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.task-container .card-inner.is-flipped {
+  transform: rotateY(180deg);
+  box-shadow: 0 20px 50px rgba(255, 145, 0, 0.3);
+}
+
+.task-container .card-front, 
+.task-container .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 正面樣式優化：讓密碼編碼卡片更清晰，移除過深的黑色遮罩 */
+.task-container .card-front {
+  background-color: #1a1f2c;
+  transform: rotateY(0deg);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* 抽卡就位後的 Hover 特效：邊框亮起、產生賽博朋克霓虹光 */
+.task-container .card-cluster.ready .deck-card-wrapper:hover .card-front {
+  border-color: #ff9100;
+  box-shadow: 0 0 20px rgba(255, 145, 0, 0.3);
+  cursor: pointer;
+}
+
+.task-container .card-back {
+  background-color: #1a1f2c;
+  transform: rotateY(180deg);
+  border-color: #ff9100;
+}
+
+/* 橫式圖片填滿裁切 */
+.task-container .card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 卡片上方的覆蓋文字優化（更具未來科技感，非死黑遮罩） */
+.task-container .front-overlay,
+.task-container .back-overlay {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.task-container .front-overlay {
+  color: #ff9100;
+  border: 1px solid rgba(255, 145, 0, 0.3);
+}
+
+.task-container .back-overlay {
+  color: #00ffaa;
+  border: 1px solid rgba(0, 255, 170, 0.3);
+}
+
+/* 洗牌動畫隔離 */
+.task-container .shuffling .deck-card-wrapper {
+  animation: taskDynamicShuffle 0.45s ease-in-out infinite alternate;
+}
+
+@keyframes taskDynamicShuffle {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% {
+    transform: translate(var(--shuffle-x), -20px) rotate(var(--shuffle-r));
+    box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* ==========================================================================
+   控制按鈕：開始任務分派 (Dispatch Button) 樣式
+   ========================================================================== */
+.task-container .dispatch-button {
+  position: relative;
+  z-index: 5;
+  padding: 14px 42px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff9100 0%, #e65c00 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(255, 145, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+.task-container .dispatch-button .target-icon {
+  font-size: 18px;
+  transition: transform 0.5s ease;
+}
+
+.task-container .dispatch-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 145, 0, 0.6),
+              0 0 0 4px rgba(255, 145, 0, 0.15);
+  background: linear-gradient(135deg, #ff9e1b 0%, #f56504 100%);
+}
+
+.task-container .dispatch-button:hover:not(:disabled) .target-icon {
+  transform: rotate(90deg) scale(1.1);
+}
+
+.task-container .dispatch-button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 3px 10px rgba(255, 145, 0, 0.3);
+}
+
+.task-container .dispatch-button::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+}
+
+.task-container .dispatch-button:hover:not(:disabled)::after {
+  left: 100%;
+  transition: left 0.6s ease-in-out;
+}
+
+/* 狀態切換與禁用樣式 */
+.task-container .dispatch-button:disabled,
+.task-container .dispatch-button.disabled {
+  cursor: not-allowed;
+  background: #1a202c;
+  color: #64748b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  transform: none;
+}
+
+.task-container .dispatch-button:disabled .target-icon,
+.task-container .dispatch-button.disabled .target-icon {
+  opacity: 0.4;
+}
+
+.task-container .dispatch-button.disabled {
+  animation: buttonPulse 1.5s ease-in-out infinite alternate;
+}
+
+.task-container .dispatch-button[disabled] {
+  border-color: rgba(0, 255, 170, 0.2);
+  color: #8fa0ba;
+}
+
+@keyframes buttonPulse {
+  0% { border-color: rgba(255, 145, 0, 0.1); }
+  100% { border-color: rgba(255, 145, 0, 0.3); color: #a0aec0; }
+}
+
+/* ==========================================================================
+   結果彈窗：檔案解密成功 (Result Modal) 樣式面版
+   ========================================================================== */
+.task-container .result-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(7, 10, 15, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 999;
+  animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.task-container .result-modal-content {
+  background: #161b26;
+  width: 440px;
+  max-width: 90%;
+  border-radius: 16px;
+  border: 1px solid #ff9100;
+  box-shadow: 0 0 40px rgba(255, 145, 0, 0.25), inset 0 0 20px rgba(255, 145, 0, 0.05);
+  overflow: hidden;
+  position: relative;
+  animation: modalScaleUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.task-container .modal-header {
+  padding: 18px 24px;
+  background: rgba(255, 145, 0, 0.04);
+  border-bottom: 1px solid rgba(255, 145, 0, 0.15);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.task-container .modal-header h3 {
+  margin: 0; font-size: 16px; font-weight: 600; color: #ff9100; letter-spacing: 1px;
+}
+
+.task-container .close-btn {
+  background: transparent; border: none; color: #64748b; font-size: 24px; cursor: pointer; line-height: 1; padding: 0; transition: color 0.2s ease;
+}
+
+.task-container .close-btn:hover { color: #ff9100; }
+.task-container .modal-body { padding: 24px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+/* 彈窗內部的任務圖片：同樣放大到 340x240 與主畫面卡片完美對齊 */
+.task-container .result-card-img-wrapper {
+  width: 340px;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  margin-bottom: 20px;
+  background: #0d1117;
+  position: relative;
+}
+
+.task-container .result-card-name { font-size: 22px; font-weight: 600; color: #ffffff; margin: 0 0 10px 0; letter-spacing: 0.5px; }
+.task-container .result-desc { font-size: 13px; color: #8c9ba5; margin: 0; line-height: 1.5; }
+.task-container .modal-footer { padding: 0 24px 24px 24px; display: flex; justify-content: center; }
+
+.task-container .confirm-btn {
+  width: 100%; padding: 14px 0; font-size: 15px; font-weight: 600; color: #11141a; background: #ff9100; border: none; border-radius: 6px; cursor: pointer; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(255, 145, 0, 0.3); transition: all 0.2s ease;
+}
+.task-container .confirm-btn:hover { background: #ff9e1b; box-shadow: 0 6px 20px rgba(255, 145, 0, 0.5); transform: translateY(-1px); }
+.task-container .confirm-btn:active { transform: translateY(1px); }
+
+/* 📡 Glitch 訊號干擾與全息投影效果 */
+.task-container .glitch-signal-effect::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 3px, 3px 100%; pointer-events: none;
+}
+
+.task-container .glitch-signal-effect::before {
+  content: ''; position: absolute; width: 100%; height: 4px; background: rgba(255, 145, 0, 0.3); top: 0; left: 0; animation: scanline 2s linear infinite; pointer-events: none;
+}
+
+@keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalScaleUp { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes scanline { 0% { top: 0%; } 50% { top: 100%; } 100% { top: 0%; } }

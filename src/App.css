@@ -1,38 +1,667 @@
-.App {
-  text-align: center;
+/* ==========================================
+   1. 全域變數與基礎設定
+   ========================================== */
+:root {
+  --bg-dark: #1e2028;
+  --sidebar-bg: #252833;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --text-main: #ffffff;
+  --text-dim: #a0a5b1;
+  --accent-blue: #5b99ff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  font-family: "Microsoft JhengHei", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.dashboard {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ==========================================
+   2. 手機版專用頂部列 (預設隱藏)
+   ========================================== */
+.mobile-header {
+  display: none;
+}
+.sidebar-overlay {
+  display: none;
+}
+
+/* ==========================================
+   3. 側邊欄 (Sidebar) 樣式
+   ========================================== */
+.sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.logo-area {
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 10px;
+}
+
+.logo-area img {
+  object-fit: contain;
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.3));
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: var(--text-dim);
+  padding: 12px 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-item.active {
+  background: rgba(91, 153, 255, 0.15);
+  color: var(--accent-blue);
+}
+
+.system-info {
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+.status-tag {
+  color: var(--accent-blue);
+  font-weight: bold;
+}
+
+/* ==========================================
+   4. 主要內容區 (Content Area) 與卡片
+   ========================================== */
+.content-area {
+  flex: 1;
+  padding: 60px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.hero-section {
+  max-width: 1000px;
+}
+
+.badge {
+  background: rgba(255, 120, 120, 0.1);
+  color: #ff7878;
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+/* 大標題漸層優化 */
+.hero-title {
+  font-size: 64px;
+  margin: 0;
+  line-height: 1.15;
+  font-weight: bold;
+  background: linear-gradient(to bottom, #ffffff 40%, #768195 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blue-text {
+  background: linear-gradient(to bottom, #699fff, #3d6ec2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  color: #8c92a0;
+  margin: 30px 0 50px 0;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+/* 網格卡片佈局：兩欄排列 */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 960px; /* 控制整體寬度緊湊度 */
+}
+
+/* 卡片主體：橫向排列 (圖示在左、文字在右) */
+.feature-card {
+  background: rgba(45, 48, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 32px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  background: rgba(45, 48, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 圖示的外包裝方塊 (帶有深色膠囊/方塊背景) */
+.card-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.App-link {
-  color: #61dafb;
+.card-icon {
+  font-size: 26px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* 卡片內右側文字區 */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature-card h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.card-btn {
+  background: none;
+  border: none;
+  color: #5b99ff;
+  opacity: 0.8;
+  cursor: pointer;
+  padding: 0;
+  font-size: 13px;
+  text-align: left;
+  transition: opacity 0.2s;
+}
+
+.card-btn:hover {
+  opacity: 1;
+}
+
+/* 各個圖示的微亮微弱邊框或特殊色調 (選用，增加細緻度) */
+.border-yellow .card-icon-wrapper { border: 1px solid rgba(255, 193, 7, 0.1); }
+.border-blue .card-icon-wrapper { border: 1px solid rgba(64, 123, 255, 0.1); }
+.border-green .card-icon-wrapper { border: 1px solid rgba(40, 167, 69, 0.1); }
+.border-purple .card-icon-wrapper { border: 1px solid rgba(155, 89, 182, 0.1); }
+.border-red .card-icon-wrapper { border: 1px solid rgba(231, 76, 60, 0.1); }
+
+/* ==========================================
+   RWD 手機版相容修正
+   ========================================== */
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr; /* 手機版自動切回單欄 */
+    gap: 20px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .feature-card {
+    padding: 20px;
+    gap: 20px;
   }
+
+  .card-icon-wrapper {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+  }
+  
+  .feature-card h3 {
+    font-size: 18px;
+  }
+}
+
+/* 針對更小螢幕的微調 (例如小尺寸手機) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 32px;
+  }
+}
+
+/* ==========================================
+   以下為新增的「規則介紹」專屬樣式 (Rules Section)
+   ========================================== */
+.rules-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* 頂部標題列 */
+.rules-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-icon {
+  width: 45px;
+  height: 45px;
+  background: rgba(91, 153, 255, 0.15);
+  border: 1px solid rgba(91, 153, 255, 0.3);
+  color: #5b99ff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.header-text h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.header-text .subtitle {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #707786;
+}
+
+/* 頂部小箭頭 */
+.header-nav-arrows {
+  display: flex;
+  gap: 10px;
+}
+
+.arrow-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #707786;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.arrow-btn:hover:not(.disabled) {
+  background: #5b99ff;
+  color: #ffffff;
+  border-color: #5b99ff;
+}
+
+.arrow-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   模擬系統中央主機板塊 (視窗)
+   ========================================== */
+.rules-window {
+  background: #2b2e3a;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 視窗上方工具列 */
+.window-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.window-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.window-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.dot.red { background-color: #ff5f56; }
+.dot.yellow { background-color: #ffbd2e; }
+.dot.green { background-color: #27c93f; }
+
+.window-protocol {
+  font-family: monospace;
+  font-size: 11px;
+  color: #525a6c;
+  letter-spacing: 1px;
+}
+
+/* 視窗內容核心區 */
+.window-content {
+  padding: 40px 50px;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #21232d;
+}
+
+.content-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 40px;
+}
+
+/* 左側：圖形區 */
+.visual-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.rule-illustration {
+  max-height: 320px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.4));
+  z-index: 2;
+}
+
+.image-placeholder-hint {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.05);
+  font-size: 14px;
+  letter-spacing: 2px;
+  z-index: 1;
+}
+
+/* 右側：對話方塊氣泡 */
+.dialog-box {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 25px 35px;
+  max-width: 320px;
+  flex: 1;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dialog-box p {
+  margin: 0;
+  font-size: 20px;
+  color: #7b93b4;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* 視窗底部資訊列 */
+.window-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  font-family: monospace;
+  font-size: 11px;
+  color: #525a6c;
+}
+
+.status-active {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #5b99ff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #5b99ff;
+}
+
+/* ==========================================
+   進度條與按鈕控制區
+   ========================================== */
+/* 分頁小圓點 */
+.dots-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 5px 0;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  background: #393e4d;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+  width: 24px;
+  background: #5b99ff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(91, 153, 255, 0.4);
+}
+
+/* 底部功能大按鈕 */
+.control-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 20px;
+  margin-top: 5px;
+}
+
+.btn-preview {
+  position: absolute;
+  left: 0;
+  background: none;
+  border: none;
+  color: #4c5362;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+  letter-spacing: 1px;
+}
+
+.btn-preview:hover {
+  color: #ffffff;
+}
+
+.btn-preview.hidden {
+  display: none;
+}
+
+.btn-deploy {
+  background: #4a7fd4;
+  border: none;
+  color: #ffffff;
+  padding: 16px 60px;
+  border-radius: 16px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 24px rgba(74, 127, 212, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-deploy:hover {
+  background: #5b99ff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(91, 153, 255, 0.4);
+}
+
+/* ==========================================
+   RWD 手機端自動配適
+   ========================================== */
+@media (max-width: 768px) {
+  .rules-window {
+    border-radius: 20px;
+  }
+  .window-content {
+    padding: 30px 20px;
+  }
+  .content-layout {
+    flex-direction: column;
+    gap: 25px;
+  }
+  .dialog-box {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+  .dialog-box p {
+    font-size: 16px;
+    text-align: center;
+  }
+  .btn-preview {
+    position: static;
+  }
+  .control-actions {
+    flex-direction: column-reverse;
+    gap: 15px;
+  }
+  .btn-deploy {
+    width: 100%;
+    padding: 14px;
+  }
+}
+
+/* ==========================================
+   純圖片規則展示樣式
+   ========================================== */
+.solo-image-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 380px; /* 保持與原視窗相近的高度規模 */
+}
+
+.rule-illustration-full {
+  max-width: 100%;
+  max-height: 420px; /* 控制圖片最大高度，避免衝破黑框 */
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0px 10px 25px rgba(0, 0, 0, 0.4));
+  animation: fadeInRule 0.3s ease-in-out;
+}
+
+@keyframes fadeInRule {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 語言切換器外層容器 */
+.language-selector-wrapper {
+  padding: 15px 20px;
+  margin-top: auto; /* 讓它自動推到導覽列最下方，系統資訊上方 */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 語言標題文字 */
+.lang-label {
+  font-size: 12px;
+  color: #8a99ad;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 下拉選單本體樣式 */
+.language-select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #e2e8f0;
+  background-color: #1e2640; /* 配合原本側邊欄的深藍黑色調 */
+  border: 1px solid #334155;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  /* 針對客製化下拉箭頭 */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238a99ad' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+/* Hover 或是 Focus 時的高亮效果 */
+.language-select:hover, .language-select:focus {
+  border-color: #3b82f6; /* 亮藍色邊框 */
+  background-color: #232d4b;
+}
+
+/* 下拉選單裡面的選項（部分瀏覽器支援） */
+.language-select option {
+  background-color: #1e2640;
+  color: #e2e8f0;
 }

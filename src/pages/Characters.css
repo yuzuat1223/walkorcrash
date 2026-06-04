@@ -1,0 +1,211 @@
+/* Characters.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.characters-page {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent; /* 保持透明，融入 App.js 背景 */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 標題區域佈局 */
+.title-area {
+  position: absolute;
+  top: 35px;
+  left: 60px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-main {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* Icon 圓角框與文字的間距 */
+  margin-bottom: 16px; /* 拉開標題與下方說明文字的間距 */
+}
+
+/* 人像 Icon + 圓角方形背景 */
+.user-icon {
+  width: 46px;
+  height: 46px;
+  padding: 8px; /* 讓內置 Icon 圖案與外框保持舒適的內距 */
+  background: rgba(255, 255, 255, 0.08); /* 半透明白色方形背景（可依背景深淺調整） */
+  border-radius: 12px; /* 圓角方形效果 */
+  color: #67a9ff; /* 調整 Icon 本身顏色與導覽鈕呼應，你也可以改回 white */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05); /* 微弱的內邊框增添質感 */
+}
+
+.title-area h1 {
+  color: white;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1; /* 確保縮放時高度完美居中 */
+}
+
+.title-area p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+/* 輪播區域與卡片尺寸調小 */
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  perspective: 2000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-wrapper {
+  position: absolute;
+  transition: all 0.6s ease;
+}
+
+.character-card {
+  width: 260px; /* 卡片縮小 */
+  height: 422px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 翻牌速度加快至 0.4s */
+  cursor: pointer;
+}
+
+.character-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  position: absolute;
+  backface-visibility: hidden;
+  background: #3a3d4c;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* 各卡片位置參數維持比例 */
+.pos-0 {
+  transform: translateX(0) scale(1);
+  z-index: 5;
+  opacity: 1;
+}
+
+.pos--1 {
+  transform: translateX(-240px) rotateY(25deg) scale(0.82);
+  z-index: 4;
+  opacity: 0.65;
+}
+
+.pos--2 {
+  transform: translateX(-420px) rotateY(35deg) scale(0.65);
+  z-index: 3;
+  opacity: 0.3;
+}
+
+.pos-1 {
+  transform: translateX(240px) rotateY(-25deg) scale(0.82);
+  z-index: 4;
+  opacity: 0.65;
+}
+
+.pos-2 {
+  transform: translateX(420px) rotateY(-35deg) scale(0.65);
+  z-index: 3;
+  opacity: 0.3;
+}
+
+/* 導覽按鈕 */
+.nav-btn {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  color: #67a9ff;
+  font-size: 46px;
+  cursor: pointer;
+  z-index: 20;
+  transition: 0.3s;
+}
+
+.nav-btn:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-btn.left {
+  left: 60px;
+}
+
+.nav-btn.right {
+  right: 60px;
+}
+
+/* RWD 響應式微調 */
+@media (max-width: 1200px) {
+  .character-card {
+    width: 220px;
+    height: 357px;
+  }
+
+  .pos--1 { transform: translateX(-190px) rotateY(25deg) scale(0.8); }
+  .pos--2 { transform: translateX(-330px) rotateY(35deg) scale(0.6); }
+  .pos-1 { transform: translateX(190px) rotateY(-25deg) scale(0.8); }
+  .pos-2 { transform: translateX(330px) rotateY(-35deg) scale(0.6); }
+}
+
+@media (max-width: 768px) {
+  .character-card {
+    width: 180px;
+    height: 292px;
+  }
+
+  .title-area {
+    left: 30px;
+    top: 25px;
+  }
+
+  .title-area h1 { font-size: 30px; }
+  .user-icon { width: 36px; height: 36px; padding: 6px; border-radius: 8px; }
+  .title-main { margin-bottom: 10px; gap: 10px; }
+  .title-area p { font-size: 13px; }
+
+  .nav-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 34px;
+  }
+
+  .pos--2, .pos-2 { opacity: 0; }
+  .pos--1 { transform: translateX(-130px) rotateY(20deg) scale(0.75); }
+  .pos-1 { transform: translateX(130px) rotateY(-20deg) scale(0.75); }
+}

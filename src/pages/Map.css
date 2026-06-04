@@ -1,0 +1,342 @@
+/* Map.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 頂層容器 */
+.map-container {
+  width: 100%;
+  min-height: 100vh;
+  background: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 40px 80px 40px; 
+}
+
+/* 標題區 */
+.title-area {
+  width: 100%;
+  max-width: 1300px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.title-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.title-main h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.title-area p {
+  color: #8a8894;
+  font-size: 14px;
+}
+
+.map-location-icon {
+  width: 44px;
+  height: 44px;
+  padding: 9px;
+  background: rgba(224, 122, 122, 0.12);
+  border-radius: 12px;
+  color: #e07a7a; 
+  box-shadow: 0 0 15px rgba(224, 122, 122, 0.15);
+}
+
+/* 內容卡片網格 */
+.map-main-content {
+  width: 100%;
+  max-width: 1300px;
+  z-index: 5;
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+/* 卡片主體 */
+.map-card {
+  background: #2a2930; 
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+
+.map-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(224, 122, 122, 0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.card-sector {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(224, 122, 122, 0.08);
+  border: 1px solid rgba(224, 122, 122, 0.2);
+  color: #e07a7a;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* 列表卡片的縮圖區域 */
+.card-image-area {
+  width: 100%;
+  height: 180px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 讓圖片填滿縮圖區不變形 */
+  transition: transform 0.5s ease;
+}
+
+.map-card:hover .card-img {
+  transform: scale(1.04); /* 懸浮時稍微放大，增加互動感 */
+}
+
+.card-info-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-icon {
+  width: 18px;
+  height: 18px;
+  color: #e07a7a;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: #92909c;
+  line-height: 1.6;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 16px;
+  color: #e07a7a;
+}
+
+.tap-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   詳細情報彈窗 (Intel Modal Styles)
+   ========================================================================== */
+.intel-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(15, 15, 18, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.intel-modal-content {
+  background: #232228; 
+  width: 920px;
+  height: 560px;
+  max-width: 95%;
+  border-radius: 32px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.intel-close-btn {
+  position: absolute;
+  top: 24px; right: 24px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #19181d;
+  border: none;
+  color: #a09eab;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.intel-close-btn:hover { background: #2f2d37; color: #ffffff; }
+
+/* 彈窗左側：圖片專用大區塊 */
+.intel-modal-left {
+  flex: 1.1;
+  background: #1c1b20; /* 略深色背景以突顯圖片 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; /* 讓圖片填滿或留白看設計 */
+  position: relative;
+}
+
+/* 大圖片包覆盒 */
+.intel-big-image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* 中央顯示的對應大插圖 */
+.intel-big-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 完美自適應裁切，絕不變形歪斜 */
+  display: block;
+}
+
+/* 科技感全息微光遮罩層 */
+.hologram-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(224, 122, 122, 0.05) 0%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* 彈窗右側：情報文字區 */
+.intel-modal-right {
+  flex: 0.9;
+  padding: 45px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.intel-subtitle {
+  color: #e07a7a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.intel-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.intel-title-icon {
+  display: inline-flex;
+  color: #e07a7a;
+  padding: 6px;
+  background: rgba(224, 122, 122, 0.1);
+  border-radius: 10px;
+}
+
+.intel-divider {
+  width: 60px;
+  height: 3px;
+  background: #e07a7a;
+  margin: 16px 0 24px 0;
+  border-radius: 2px;
+}
+
+.intel-desc-box {
+  background: #1d1c22;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: 14px;
+  padding: 20px;
+  flex-grow: 1;
+  margin-bottom: 24px;
+}
+.intel-desc-box p {
+  color: #c5c3ce;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.intel-location-tag {
+  font-size: 13px;
+  color: #8c8a95;
+  margin-bottom: 28px;
+}
+.intel-location-tag .dot {
+  color: #e07a7a;
+  font-size: 10px;
+  margin-right: 4px;
+}
+.intel-location-tag .loc-text {
+  color: #c5c3ce;
+}
+
+.intel-return-btn {
+  width: 100%;
+  padding: 16px 0;
+  background: #e07a7a; 
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 10px 25px rgba(224, 122, 122, 0.15);
+  transition: background 0.2s;
+}
+.intel-return-btn:hover {
+  background: #e58787;
+}

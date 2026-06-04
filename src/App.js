@@ -5,7 +5,7 @@ import Characters from './pages/Characters';
 import Task from './pages/Task';
 import Question from './pages/Question';
 import Map from './pages/Map';
-import { translations } from './i18nData'; // 💡 確保這一行沒有被註解掉！
+import { translations } from './i18nData'; 
 import { AiFillHome } from "react-icons/ai";
 import { IoBook } from "react-icons/io5";
 import { MdPeopleAlt } from "react-icons/md";

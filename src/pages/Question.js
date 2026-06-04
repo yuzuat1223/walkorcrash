@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { questionCardsData } from './QuestionData';
+import { HiQuestionMarkCircle } from "react-icons/hi";
 import './Question.css';
 
 const Question = () => {
@@ -67,11 +68,7 @@ const Question = () => {
       {/* 標題區塊 */}
       <div className="title-area">
         <div className="title-main">
-          <svg className="user-icon mission-target-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 3H4V9M15 3H20V9M4 15V20H9M20 15V20H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M9 9C9 7.34315 10.3431 6 12 6C13.6569 6 15 7.34315 15 9C15 10.5 13.5 11.5 12.5 12.5V14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="12" cy="17.5" r="1.5" fill="currentColor"/>
-          </svg>
+          <HiQuestionMarkCircle size={24} color="#8A2BE2" />
           <h1>問答題庫</h1>
         </div>
         <p>隨機抽取加密考題，解鎖情報權限</p>

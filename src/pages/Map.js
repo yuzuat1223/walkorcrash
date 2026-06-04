@@ -1,6 +1,7 @@
 // Map.js
 import React, { useState } from 'react';
 import { mapCardsData } from './MapData';
+import { GiPositionMarker } from "react-icons/gi";
 import './Map.css';
 
 const Map = () => {
@@ -19,10 +20,7 @@ const Map = () => {
       {/* 頂部標題區 */}
       <div className="title-area">
         <div className="title-main">
-          <svg className="map-location-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 21C16 16.8 19 13.2222 19 9.66667C19 5.43248 15.866 2 12 2C8.13401 2 5 5.43248 5 9.66667C5 13.2222 8 16.8 12 21Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-            <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" strokeWidth="2"/>
-          </svg>
+          <GiPositionMarker size={24} color="#CD5C5C" />
           <h1>建築景點</h1>
         </div>
         <p>了解各大場景與建築的詳細資訊</p>

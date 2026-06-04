@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/walkorcrash/static/css/main.23ddda5f.css",
-    "main.js": "/walkorcrash/static/js/main.d2352afc.js",
+    "main.js": "/walkorcrash/static/js/main.aa3fce86.js",
     "static/js/453.ac0a0af3.chunk.js": "/walkorcrash/static/js/453.ac0a0af3.chunk.js",
     "static/media/s6.png": "/walkorcrash/static/media/s6.57118c9e0d21473b933f.png",
     "static/media/s1.png": "/walkorcrash/static/media/s1.b591b329b44fad17548a.png",
@@ -10,15 +10,33 @@
     "static/media/s4.png": "/walkorcrash/static/media/s4.3c07ad805028124e87b4.png",
     "static/media/s3.png": "/walkorcrash/static/media/s3.855c347c35c8d9f2ef86.png",
     "static/media/s7.png": "/walkorcrash/static/media/s7.74f4223a37d55a0196b9.png",
+    "static/media/C_1A.png": "/walkorcrash/static/media/C_1A.d58531a974c308e786fb.png",
+    "static/media/C_4A.png": "/walkorcrash/static/media/C_4A.b0d9674eeb1cd984fd81.png",
+    "static/media/C_5A.png": "/walkorcrash/static/media/C_5A.a78f903108e1f692980a.png",
+    "static/media/C_7A.png": "/walkorcrash/static/media/C_7A.b7ac6f65c0c77fffa32a.png",
+    "static/media/C_9A.png": "/walkorcrash/static/media/C_9A.441d2ebf37d38605afe0.png",
+    "static/media/C_3A.png": "/walkorcrash/static/media/C_3A.a2b109c8af66b6cbab48.png",
+    "static/media/C_8A.png": "/walkorcrash/static/media/C_8A.54f7d4243cf4dc1bb2e6.png",
+    "static/media/C_6A.png": "/walkorcrash/static/media/C_6A.7e9700fb44cb549c100c.png",
+    "static/media/C_2A.png": "/walkorcrash/static/media/C_2A.aed0b1f48a5d41ab66af.png",
+    "static/media/C_2B.png": "/walkorcrash/static/media/C_2B.aaebd72d341dde840350.png",
+    "static/media/C_5B.png": "/walkorcrash/static/media/C_5B.93441c1402f37895f8f3.png",
+    "static/media/C_6B.png": "/walkorcrash/static/media/C_6B.e43473960f577373a1ed.png",
+    "static/media/C_3B.png": "/walkorcrash/static/media/C_3B.e87157507120657600ac.png",
+    "static/media/C_8B.png": "/walkorcrash/static/media/C_8B.3e4d2859e9709b10c697.png",
+    "static/media/C_1B.png": "/walkorcrash/static/media/C_1B.dd211d844c7ce5445260.png",
+    "static/media/C_7B.png": "/walkorcrash/static/media/C_7B.2d1fbfb619418fd1af2c.png",
+    "static/media/C_9B.png": "/walkorcrash/static/media/C_9B.b8630592a571ae5883ee.png",
+    "static/media/C_4B.png": "/walkorcrash/static/media/C_4B.0f43a33f3cef6e5ce64a.png",
     "static/media/logo.png": "/walkorcrash/static/media/logo.be050ea6f69d84cacdc7.png",
     "static/media/logo1.png": "/walkorcrash/static/media/logo1.0cf4dbbecb5be68b286e.png",
     "index.html": "/walkorcrash/index.html",
     "main.23ddda5f.css.map": "/walkorcrash/static/css/main.23ddda5f.css.map",
-    "main.d2352afc.js.map": "/walkorcrash/static/js/main.d2352afc.js.map",
+    "main.aa3fce86.js.map": "/walkorcrash/static/js/main.aa3fce86.js.map",
     "453.ac0a0af3.chunk.js.map": "/walkorcrash/static/js/453.ac0a0af3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.23ddda5f.css",
-    "static/js/main.d2352afc.js"
+    "static/js/main.aa3fce86.js"
   ]
 }

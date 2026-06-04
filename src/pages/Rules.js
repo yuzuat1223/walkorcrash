@@ -2,49 +2,51 @@ import React, { useState } from 'react';
 import './Rules.css';
 
 const Rules = () => {
-  // 💡 【修正重點】使用 process.env.PUBLIC_URL 確保在本地和 GitHub Pages 部署時，圖片基準路徑都能動態配對正確
+  // 💡 【修正重點】因為圖片在 src 底下，直接使用 require() 來動態載入圖片路徑
+  // 請確認你的 Rules.js 檔案與 pictures 資料夾的相對位置：
+  // 這裡假設 Rules.js 在 src/pages/ 底下，所以要用 '../pictures/...' 回上一層
   const rulesData = [
     {
       id: 1,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 1 / 7 階段',
-      image: `${process.env.PUBLIC_URL}/pictures/rules/s1.png`, 
+      image: require('../pictures/rules/s1.png'), 
     },
     {
       id: 2,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 2 / 7 階段',
-      image: `${process.env.PUBLIC_URL}/pictures/rules/s2.png`,
+      image: require('../pictures/rules/s2.png'),
     },
     {
       id: 3,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 3 / 7 階段',
-      image: `${process.env.PUBLIC_URL}/pictures/rules/s3.png`,
+      image: require('../pictures/rules/s3.png'),
     },
     {
       id: 4,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 4 / 7 階段',
-      image: `${process.env.PUBLIC_URL}/pictures/rules/s4.png`,
+      image: require('../pictures/rules/s4.png'),
     },
     {
       id: 5,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 5 / 7 階段',
-      image: `${process.env.PUBLIC_URL}/pictures/rules/s5.png`,
+      image: require('../pictures/rules/s5.png'),
     },
     {
       id: 6,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 6 / 7 階段',
-      image: `${process.env.PUBLIC_URL}/pictures/rules/s6.png`,
+      image: require('../pictures/rules/s6.png'),
     },
     {
       id: 7,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 7 / 7 階段',
-      image: `${process.env.PUBLIC_URL}/pictures/rules/s7.png`,
+      image: require('../pictures/rules/s7.png'),
     }
   ];
 
@@ -104,7 +106,7 @@ const Rules = () => {
           <div className="window-protocol">PROTOCOL_V2.0_SECURE</div>
         </div>
 
-        {/* 視窗內部主要內容區（電波特效直接裝在這裡，讓它滿版） */}
+        {/* 視窗內部主要內容區 */}
         <div className="window-content glitch-wrapper">
           {/* 電視掃描線與螢幕閃爍濾鏡 */}
           <div className="tv-scanlines"></div>
@@ -117,9 +119,8 @@ const Rules = () => {
               alt="Rule Visual"
               className="rule-illustration glitch-img"
               onError={(e) => {
-                // 💡 如果沒加載成功，移除這行隱藏，方便你抓錯除錯
-                console.error("圖片載入失敗，確認路徑是否正確:", e.target.src);
-              }} 
+                console.error("圖片載入失敗，確認位置是否放對：", e.target.src);
+              }}
             />
           </div>
         </div>

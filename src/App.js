@@ -14,9 +14,9 @@ import { HiQuestionMarkCircle } from "react-icons/hi";
 import { GiPositionMarker } from "react-icons/gi";
 import './App.css';
 
-// 💡 【修正點 1】從 src/pictures/ 引入你的圖片（把圖片變成變數）
-import logoImg from '../pictures/logo.png';
-import logo1Img from '../pictures/logo1.png';
+// 💡 從 src/pictures/ 引入你的圖片變數（Webpack 會自動處理編譯後的路徑）
+import logoImg from './pictures/logo.png';
+import logo1Img from './pictures/logo1.png';
 
 // ==========================================
 // 1. 首頁元件 (Home Component) - 傳入 t 讓文字連動
@@ -32,7 +32,6 @@ const Home = ({ t }) => (
       <Link to="/rules" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="feature-card border-yellow" style={{ cursor: 'pointer' }}>
           <div className="card-icon-wrapper bg-yellow">
-            {/* 💡 已為 icon 加上繽紛的顏色與放大尺寸 */}
             <span className="card-icon"><IoBook size={24} color="#D4AF37" /></span>
           </div>
           <div className="card-body">
@@ -112,13 +111,9 @@ const PlaceholderPage = ({ title, t }) => (
 // ==========================================
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-  // 語系狀態控制，預設為中文 'zh-TW'
   const [language, setLanguage] = useState('zh-TW');
 
-  // 👇 根據目前選取的語言，撈出對應的文字檔物件
   const t = translations[language];
-
   const closeMenu = () => setIsMenuOpen(false);
 
   const handleLanguageChange = (e) => {
@@ -133,7 +128,8 @@ function App() {
         {/* 手機版頂部工具列 */}
         <header className="mobile-header">
           <div className="mobile-logo">
-            <img src="./logo.png" alt="Logo" />
+            {/* 💡 【修正重點】將原本的字串 "./logo.png" 改為使用上方 import 的圖片變數 {logoImg} */}
+            <img src={logoImg} alt="Logo" />
           </div>
           <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? '✕' : '☰'}
@@ -146,15 +142,14 @@ function App() {
         {/* 側邊欄 */}
         <aside className={`sidebar ${isMenuOpen ? 'open' : ''}`}>
           <div className="logo-area">
-            {/* 💡 【修正點 3】將 src 換成變數 logo1Img */}
+            {/* 💡 【修正重點】將原本的字串 "./logo1.png" 改為使用上方 import 的圖片變數 {logo1Img} */}
             <img 
-              src="./logo1.png" 
+              src={logo1Img} 
               alt="走鐘馬路 Logo" 
               style={{ width: '100%', maxWidth: '180px', height: 'auto', marginBottom: '10px' }} 
             />
           </div>
 
-          {/* 👇 把原本寫死的中文，換成 {t.xxx} */}
           <nav className="nav-links">
             <NavLink to="/" onClick={closeMenu} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               <span className="icon"><AiFillHome /></span> {t.navHome}
@@ -201,7 +196,6 @@ function App() {
         {/* 右側變動內容區 */}
         <main className="content-area">
           <Routes>
-            {/* 👇 把目前的語系檔 t 傳入 Home 和 各分頁 */}
             <Route path="/" element={<Home t={t} />} />
             <Route path="/rules" element={<Rules t={t} />} />
             <Route path="/characters" element={<Characters t={t} />} />

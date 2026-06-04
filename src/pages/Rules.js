@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Rules.css';
+import { IoBook } from "react-icons/io5";
 
 const Rules = () => {
   // 💡 【修正重點】因為圖片在 src 底下，直接使用 require() 來動態載入圖片路徑
@@ -70,7 +71,7 @@ const Rules = () => {
       {/* 頂部標題與左右小切換鈕 */}
       <div className="rules-header">
         <div className="header-left">
-          <div className="header-icon">📖</div>
+          <div className="header-icon"><IoBook size={24} color="#D4AF37" /></div>
           <div className="header-text">
             <h2>{currentRule.title}</h2>
             <p className="subtitle">{currentRule.subtitle}</p>

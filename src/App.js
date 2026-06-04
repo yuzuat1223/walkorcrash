@@ -121,7 +121,7 @@ function App() {
         {/* 手機版頂部工具列 */}
         <header className="mobile-header">
           <div className="mobile-logo">
-            <img src="/logo.png" alt="Logo" />
+            <img src="./logo.png" alt="Logo" />
           </div>
           <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? '✕' : '☰'}

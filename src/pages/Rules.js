@@ -2,49 +2,49 @@ import React, { useState } from 'react';
 import './Rules.css';
 
 const Rules = () => {
-  // 規則資料設定（總共 7 個階段）
+  // 💡 【修正重點】使用 process.env.PUBLIC_URL 確保在本地和 GitHub Pages 部署時，圖片基準路徑都能動態配對正確
   const rulesData = [
     {
       id: 1,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 1 / 7 階段',
-      image: '/pictures/rules/s1.png', 
+      image: `${process.env.PUBLIC_URL}/pictures/rules/s1.png`, 
     },
     {
       id: 2,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 2 / 7 階段',
-      image: '/pictures/rules/s2.png',
+      image: `${process.env.PUBLIC_URL}/pictures/rules/s2.png`,
     },
     {
       id: 3,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 3 / 7 階段',
-      image: '/pictures/rules/s3.png',
+      image: `${process.env.PUBLIC_URL}/pictures/rules/s3.png`,
     },
     {
       id: 4,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 4 / 7 階段',
-      image: '/pictures/rules/s4.png',
+      image: `${process.env.PUBLIC_URL}/pictures/rules/s4.png`,
     },
     {
       id: 5,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 5 / 7 階段',
-      image: '/pictures/rules/s5.png',
+      image: `${process.env.PUBLIC_URL}/pictures/rules/s5.png`,
     },
     {
       id: 6,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 6 / 7 階段',
-      image: '/pictures/rules/s6.png',
+      image: `${process.env.PUBLIC_URL}/pictures/rules/s6.png`,
     },
     {
       id: 7,
       title: '規則傳遞',
       subtitle: '數據傳輸中：第 7 / 7 階段',
-      image: '/pictures/rules/s7.png',
+      image: `${process.env.PUBLIC_URL}/pictures/rules/s7.png`,
     }
   ];
 
@@ -76,14 +76,14 @@ const Rules = () => {
         </div>
         <div className="header-nav-arrows">
           <button 
-            className={`arrow-btn ${currentIndex === 0 ? 'disabled' : ''}`} 
+            className={`arrow-btn ${currentIndex === 0 ? 'disabled' : ''}`}
             onClick={handlePrev}
             disabled={currentIndex === 0}
           >
             〈
           </button>
           <button 
-            className={`arrow-btn ${currentIndex === rulesData.length - 1 ? 'disabled' : ''}`} 
+            className={`arrow-btn ${currentIndex === rulesData.length - 1 ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={currentIndex === rulesData.length - 1}
           >
@@ -113,11 +113,12 @@ const Rules = () => {
           {/* 滿版圖片區 */}
           <div className="visual-area-full">
             <img 
-              src={currentRule.image} 
-              alt="Rule Visual" 
+              src={currentRule.image}
+              alt="Rule Visual"
               className="rule-illustration glitch-img"
               onError={(e) => {
-                e.target.style.display = 'none';
+                // 💡 如果沒加載成功，移除這行隱藏，方便你抓錯除錯
+                console.error("圖片載入失敗，確認路徑是否正確:", e.target.src);
               }} 
             />
           </div>
@@ -136,7 +137,7 @@ const Rules = () => {
       <div className="dots-indicator">
         {rulesData.map((_, index) => (
           <span 
-            key={index} 
+            key={index}
             className={`indicator-dot ${index === currentIndex ? 'active' : ''}`}
             onClick={() => setCurrentIndex(index)}
           ></span>

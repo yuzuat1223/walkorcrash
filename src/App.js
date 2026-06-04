@@ -6,9 +6,15 @@ import Task from './pages/Task';
 import Question from './pages/Question';
 import Map from './pages/Map';
 import { translations } from './i18nData'; 
+import { AiFillHome } from "react-icons/ai";
+import { IoBook } from "react-icons/io5";
+import { MdPeopleAlt } from "react-icons/md";
+import { FaTasks } from "react-icons/fa";
+import { HiQuestionMarkCircle } from "react-icons/hi";
+import { GiPositionMarker } from "react-icons/gi";
 import './App.css';
 
-// 💡 【修正點 1】從 src/pictures/ 引入你的圖片（把圖片變成變流數）
+// 💡 【修正點 1】從 src/pictures/ 引入你的圖片（把圖片變成變數）
 import logoImg from './pictures/logo.png';
 import logo1Img from './pictures/logo1.png';
 
@@ -17,15 +23,17 @@ import logo1Img from './pictures/logo1.png';
 // ==========================================
 const Home = ({ t }) => (
   <div className="hero-section">
-    <div className="badge">{t.badge}</div>
+    {/* <div className="badge">{t.badge}</div> */}
     <h1 className="hero-title">{t.title1}<br /><span className="blue-text">{t.title2}</span></h1>
     <p className="hero-subtitle">{t.subtitle}</p>
     
     <div className="card-grid">
+      {/* 規則介紹 */}
       <Link to="/rules" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="feature-card border-yellow" style={{ cursor: 'pointer' }}>
           <div className="card-icon-wrapper bg-yellow">
-            <span className="card-icon">📖</span>
+            {/* 💡 已為 icon 加上繽紛的顏色與放大尺寸 */}
+            <span className="card-icon"><IoBook size={24} color="#D4AF37" /></span>
           </div>
           <div className="card-body">
             <h3>{t.navRules}</h3>
@@ -38,7 +46,7 @@ const Home = ({ t }) => (
       <Link to="/characters" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="feature-card border-blue">
           <div className="card-icon-wrapper bg-blue">
-            <span className="card-icon">👥</span>
+            <span className="card-icon"><MdPeopleAlt size={24} color="#1E90FF" /></span>
           </div>
           <div className="card-body">
             <h3>{t.navCharacters}</h3>
@@ -49,41 +57,41 @@ const Home = ({ t }) => (
 
       {/* 任務抽卡 */}
       <Link to="/task" style={{ textDecoration: 'none', color: 'inherit' }}>
-      <div className="feature-card border-green">
-        <div className="card-icon-wrapper bg-green">
-          <span className="card-icon">📋</span>
+        <div className="feature-card border-green">
+          <div className="card-icon-wrapper bg-green">
+            <span className="card-icon"><FaTasks size={24} color="#2E8B57" /></span>
+          </div>
+          <div className="card-body">
+            <h3>{t.navTask}</h3>
+            <button className="card-btn">{t.btnLaunch}</button>
+          </div>
         </div>
-        <div className="card-body">
-          <h3>{t.navTask}</h3>
-          <button className="card-btn">{t.btnLaunch}</button>
-        </div>
-      </div>
       </Link>
 
       {/* 問答題庫 */}
       <Link to="/question" style={{ textDecoration: 'none', color: 'inherit' }}>
-      <div className="feature-card border-purple">
-        <div className="card-icon-wrapper bg-purple">
-          <span className="card-icon">❓</span>
+        <div className="feature-card border-purple">
+          <div className="card-icon-wrapper bg-purple">
+            <span className="card-icon"><HiQuestionMarkCircle size={24} color="#8A2BE2" /></span>
+          </div>
+          <div className="card-body">
+            <h3>{t.navQuestion}</h3>
+            <button className="card-btn">{t.btnLaunch}</button>
+          </div>
         </div>
-        <div className="card-body">
-          <h3>{t.navQuestion}</h3>
-          <button className="card-btn">{t.btnLaunch}</button>
-        </div>
-      </div>
       </Link>
 
       {/* 建築景點 */}
       <Link to="/map" style={{ textDecoration: 'none', color: 'inherit' }}>
-      <div className="feature-card border-red">
-        <div className="card-icon-wrapper bg-red">
-          <span className="card-icon">📍</span>
+        <div className="feature-card border-red">
+          <div className="card-icon-wrapper bg-red">
+            <span className="card-icon"><GiPositionMarker size={24} color="#CD5C5C" /></span>
+          </div>
+          <div className="card-body">
+            <h3>{t.navMap}</h3>
+            <button className="card-btn">{t.btnLaunch}</button>
+          </div>
         </div>
-        <div className="card-body">
-          <h3>{t.navMap}</h3>
-          <button className="card-btn">{t.btnLaunch}</button>
-        </div>
-      </div>
       </Link>
     </div>
   </div>
@@ -108,7 +116,7 @@ function App() {
   // 語系狀態控制，預設為中文 'zh-TW'
   const [language, setLanguage] = useState('zh-TW');
 
-  // 👇 2. 根據目前選取的語言，撈出對應的文字檔物件
+  // 👇 根據目前選取的語言，撈出對應的文字檔物件
   const t = translations[language];
 
   const closeMenu = () => setIsMenuOpen(false);
@@ -147,25 +155,25 @@ function App() {
             />
           </div>
 
-          {/* 👇 3. 把原本寫死的中文，換成 {t.xxx} */}
+          {/* 👇 把原本寫死的中文，換成 {t.xxx} */}
           <nav className="nav-links">
             <NavLink to="/" onClick={closeMenu} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-              <span className="icon">🏠</span> {t.navHome}
+              <span className="icon"><AiFillHome /></span> {t.navHome}
             </NavLink>
             <NavLink to="/rules" onClick={closeMenu} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-              <span className="icon">📖</span> {t.navRules}
+              <span className="icon"><IoBook /></span> {t.navRules}
             </NavLink>
             <NavLink to="/characters" onClick={closeMenu} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-              <span className="icon">👥</span> {t.navCharacters}
+              <span className="icon"><MdPeopleAlt /></span> {t.navCharacters}
             </NavLink>
             <NavLink to="/task" onClick={closeMenu} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-              <span className="icon">📋</span> {t.navTask}
+              <span className="icon"><FaTasks /></span> {t.navTask}
             </NavLink>
             <NavLink to="/question" onClick={closeMenu} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-              <span className="icon">❓</span> {t.navQuestion}
+              <span className="icon"><HiQuestionMarkCircle /></span> {t.navQuestion}
             </NavLink>
             <NavLink to="/map" onClick={closeMenu} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-              <span className="icon">📍</span> {t.navMap}
+              <span className="icon"><GiPositionMarker /></span> {t.navMap}
             </NavLink>
           </nav>
 
@@ -194,10 +202,8 @@ function App() {
         {/* 右側變動內容區 */}
         <main className="content-area">
           <Routes>
-            {/* 👇 4. 把目前的語系檔 t 傳入 Home 和 預留頁面 */}
+            {/* 👇 把目前的語系檔 t 傳入 Home 和 各分頁 */}
             <Route path="/" element={<Home t={t} />} />
-            
-            {/* 注意：你原本寫好的 Rules 和 Characters 元件內部如果想連動，也要像 Home 一樣傳入 {t} 去改裡面的文字喔！ */}
             <Route path="/rules" element={<Rules t={t} />} />
             <Route path="/characters" element={<Characters t={t} />} />
             <Route path="/task" element={<Task t={t} />} />

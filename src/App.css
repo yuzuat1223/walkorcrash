@@ -113,16 +113,6 @@ body {
   max-width: 1000px;
 }
 
-.badge {
-  background: rgba(255, 120, 120, 0.1);
-  color: #ff7878;
-  display: inline-block;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 12px;
-  margin-bottom: 20px;
-}
-
 /* 大標題漸層優化 */
 .hero-title {
   font-size: 64px;

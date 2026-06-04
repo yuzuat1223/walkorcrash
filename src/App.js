@@ -195,7 +195,7 @@ function App() {
             <Route path="/task" element={<Task t={t} />} />
             <Route path="/question" element={<Question t={t} />} />
             <Route path="/map" element={<Map t={t} />} />
-            <Route path="*" element={<Navigate to="/" />} />
+            {/* <Route path="*" element={<Navigate to="/" />} /> */}
           </Routes>
         </main>
       </div>

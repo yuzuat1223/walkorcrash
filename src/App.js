@@ -135,7 +135,7 @@ function App() {
         <aside className={`sidebar ${isMenuOpen ? 'open' : ''}`}>
           <div className="logo-area">
             <img 
-              src="/logo1.png" 
+              src="./logo1.png" 
               alt="走鐘馬路 Logo" 
               style={{ width: '100%', maxWidth: '180px', height: 'auto', marginBottom: '10px' }} 
             />

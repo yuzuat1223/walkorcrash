@@ -5,7 +5,7 @@ import Characters from './pages/Characters';
 import Task from './pages/Task';
 import Question from './pages/Question';
 import Map from './pages/Map';
-// import { translations } from './i18nData'; 
+import { translations } from './i18nData'; // 💡 確保這一行沒有被註解掉！
 import { AiFillHome } from "react-icons/ai";
 import { IoBook } from "react-icons/io5";
 import { MdPeopleAlt } from "react-icons/md";
@@ -16,12 +16,10 @@ import './App.css';
 
 const Home = ({ t }) => (
   <div className="hero-section">
-    {/* <div className="badge">{t.badge}</div> */}
     <h1 className="hero-title">{t.title1}<br /><span className="blue-text">{t.title2}</span></h1>
     <p className="hero-subtitle">{t.subtitle}</p>
     
     <div className="card-grid">
-      {/* 規則介紹 */}
       <Link to="/rules" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="feature-card border-yellow" style={{ cursor: 'pointer' }}>
           <div className="card-icon-wrapper bg-yellow">
@@ -34,7 +32,6 @@ const Home = ({ t }) => (
         </div>
       </Link>
 
-      {/* 人物圖鑑 */}
       <Link to="/characters" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="feature-card border-blue">
           <div className="card-icon-wrapper bg-blue">
@@ -47,7 +44,6 @@ const Home = ({ t }) => (
         </div>
       </Link>
 
-      {/* 任務抽卡 */}
       <Link to="/task" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="feature-card border-green">
           <div className="card-icon-wrapper bg-green">
@@ -60,7 +56,6 @@ const Home = ({ t }) => (
         </div>
       </Link>
 
-      {/* 問答題庫 */}
       <Link to="/question" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="feature-card border-purple">
           <div className="card-icon-wrapper bg-purple">
@@ -73,7 +68,6 @@ const Home = ({ t }) => (
         </div>
       </Link>
 
-      {/* 建築景點 */}
       <Link to="/map" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="feature-card border-red">
           <div className="card-icon-wrapper bg-red">
@@ -89,39 +83,25 @@ const Home = ({ t }) => (
   </div>
 );
 
-// ==========================================
-// 2. 其他預留分頁元件 (開發中提示)
-// ==========================================
-const PlaceholderPage = ({ title, t }) => (
-  <div className="page-content">
-    <h2>{title}</h2>
-    <p>{t.developing}</p>
-  </div>
-);
-
-// ==========================================
-// 3. 主程式核心 (App Component)
-// ==========================================
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [language, setLanguage] = useState('zh-TW');
 
-  const t = translations[language];
-  const closeMenu = () => setIsMenuOpen(false);
-
-  const handleLanguageChange = (e) => {
-    setLanguage(e.target.value);
-    console.log(`語系已切換為: ${e.target.value}`);
+  // 💡 這裡會讀取上方 import 進來的 translations 變數
+  const t = translations[language] || {
+    title1: "走鐘馬路", title2: "WALK OR CRASH", subtitle: "戰術指揮總部",
+    navHome: "首頁", navRules: "規則介紹", navCharacters: "人物圖鑑",
+    navTask: "任務抽卡", navQuestion: "問答題庫", navMap: "建築景點", btnLaunch: "進入系統"
   };
+
+  const closeMenu = () => setIsMenuOpen(false);
+  const handleLanguageChange = (e) => setLanguage(e.target.value);
 
   return (
     <Router>
       <div className="dashboard">
-        
-        {/* 手機版頂部工具列 */}
         <header className="mobile-header">
           <div className="mobile-logo">
-            {/* 💡 【修正重點】改成用 require 引入手機版的 logo.png */}
             <img src={require('./pictures/logo.png')} alt="Logo" />
           </div>
           <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -129,13 +109,10 @@ function App() {
           </button>
         </header>
 
-        {/* 手機版選單開啟時的背景遮罩 */}
         {isMenuOpen && <div className="sidebar-overlay" onClick={closeMenu}></div>}
 
-        {/* 側邊欄 */}
         <aside className={`sidebar ${isMenuOpen ? 'open' : ''}`}>
           <div className="logo-area">
-            {/* 💡 【修正重點】改成用 require 引入側邊欄的 logo1.png */}
             <img 
               src={require('./pictures/logo1.png')} 
               alt="走鐘馬路 Logo" 
@@ -164,21 +141,14 @@ function App() {
             </NavLink>
           </nav>
 
-          {/* 語言切換區塊 */}
-          {/* <div className="language-selector-wrapper">
-            <div className="lang-label">
-              <span className="icon">🌐</span> 語言 / Language
-            </div>
-            <select 
-              className="language-select" 
-              value={language} 
-              onChange={handleLanguageChange}
-            >
+          <div className="language-selector-wrapper">
+            <div className="lang-label"><span className="icon">🌐</span> 語言 / Language</div>
+            <select className="language-select" value={language} onChange={handleLanguageChange}>
               <option value="zh-TW">繁體中文 (ZH)</option>
               <option value="en">English (EN)</option>
               <option value="ja">日本語 (JA)</option>
             </select>
-          </div> */}
+          </div>
 
           <div className="system-info">
             <p>SYSTEM STATUS</p>
@@ -186,7 +156,6 @@ function App() {
           </div>
         </aside>
 
-        {/* 右側變動內容區 */}
         <main className="content-area">
           <Routes>
             <Route path="/" element={<Home t={t} />} />
@@ -195,7 +164,7 @@ function App() {
             <Route path="/task" element={<Task t={t} />} />
             <Route path="/question" element={<Question t={t} />} />
             <Route path="/map" element={<Map t={t} />} />
-            {/* <Route path="*" element={<Navigate to="/" />} /> */}
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </main>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink, Navigate, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, NavLink, Navigate, Link } from 'react-router-dom';
 import Rules from './pages/Rules';
 import Characters from './pages/Characters';
 import Task from './pages/Task';

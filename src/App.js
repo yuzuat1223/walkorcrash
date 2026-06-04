@@ -15,8 +15,8 @@ import { GiPositionMarker } from "react-icons/gi";
 import './App.css';
 
 // 💡 從 src/pictures/ 引入你的圖片變數（Webpack 會自動處理編譯後的路徑）
-import logoImg from './pictures/logo.png';
-import logo1Img from './pictures/logo1.png';
+import logoImg from '../pictures/logo.png';
+import logo1Img from '../pictures/logo1.png';
 
 // ==========================================
 // 1. 首頁元件 (Home Component) - 傳入 t 讓文字連動

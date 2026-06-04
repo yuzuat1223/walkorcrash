@@ -13,8 +13,8 @@ const Sidebar = () => {
     { path: '/', label: '首頁', icon: <AiFillHome color="#5b99ff" /> },               
     { path: '/rules', label: '規則介紹', icon: <IoBook color="#D4AF37" /> },           
     { path: '/characters', label: '人物圖鑑', icon: <MdPeopleAlt color="#1E90FF" /> }, 
-    { path: '/quests', label: '任務抽卡', icon: <FaTasks color="#2E8B57" /> },         
-    { path: '/faq', label: '問答題庫', icon: <HiQuestionMarkCircle color="#8A2BE2" /> }, 
+    { path: '/task', label: '任務抽卡', icon: <FaTasks color="#2E8B57" /> },         
+    { path: '/question', label: '問答題庫', icon: <HiQuestionMarkCircle color="#8A2BE2" /> }, 
     { path: '/map', label: '建築景點', icon: <GiPositionMarker color="#CD5C5C" /> },   
   ];
 

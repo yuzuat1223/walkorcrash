@@ -5,7 +5,7 @@ import Characters from './pages/Characters';
 import Task from './pages/Task';
 import Question from './pages/Question';
 import Map from './pages/Map';
-import { translations } from './i18nData'; 
+// import { translations } from './i18nData'; 
 import { AiFillHome } from "react-icons/ai";
 import { IoBook } from "react-icons/io5";
 import { MdPeopleAlt } from "react-icons/md";
@@ -165,7 +165,7 @@ function App() {
           </nav>
 
           {/* 語言切換區塊 */}
-          <div className="language-selector-wrapper">
+          {/* <div className="language-selector-wrapper">
             <div className="lang-label">
               <span className="icon">🌐</span> 語言 / Language
             </div>
@@ -178,7 +178,7 @@ function App() {
               <option value="en">English (EN)</option>
               <option value="ja">日本語 (JA)</option>
             </select>
-          </div>
+          </div> */}
 
           <div className="system-info">
             <p>SYSTEM STATUS</p>

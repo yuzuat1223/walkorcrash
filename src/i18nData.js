@@ -15,28 +15,28 @@ export const translations = {
     developing: '頁面開發中...'
   },
   'en': {
-    title1: 'Adventure Launch',
-    title2: 'Boardgame HQ',
-    subtitle: 'Crafted for elite players, the ultimate toolbox combining tactics, intel, and destiny.',
+    title1: 'Welcome to',
+    title2: 'Walk or Crash Survival Guide',
+    subtitle: 'Chaos ahead on the road, rules could collapse anytime! Drivers, please check the regulations and illustrations quickly. Good luck, and do not crash.',
     btnLaunch: 'Launch Protocol 〉',
     navHome: 'Home',
     navRules: 'Rules',
     navCharacters: 'Characters',
-    navQuests: 'Quest Draw',
-    navFaq: 'Q&A Database',
+    navTask: 'Quest Draw',
+    navQuestion: 'Q&A Database',
     navMap: 'Landmarks',
     developing: 'Under Development...'
   },
   'ja': {
-    title1: '冒険の始まり',
-    title2: 'ボードゲーム司令部',
-    subtitle: 'エリートプレイヤーのために作られた、戦術・情報・運命が一体となった究極のツールボックス。',
+    title1: 'ようこそ',
+    title2: 'ウォーク・オア・クラッシュ生存ガイドへ',
+    subtitle: '前方の道路状況は混沌としており、ルールはいつでも崩壊する可能性があります！ドライバーの皆さんは、速やかに規約と図鑑を確認してください。無事にクリアできることを祈ります。フリーズしないでくださいね。',
     btnLaunch: 'プロトコル起動 〉',
     navHome: 'ホーム',
     navRules: 'ルール紹介',
     navCharacters: 'キャラクター図鑑',
-    navQuests: 'クエストガチャ',
-    navFaq: 'クイズ問題集',
+    navTask: 'クエストガチャ',
+    navQuestion: 'クイズ問題集',
     navMap: '建物・観光地',
     developing: '開発中...'
   }

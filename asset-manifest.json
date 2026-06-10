@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/walkorcrash/static/css/main.688fc4b1.css",
-    "main.js": "/walkorcrash/static/js/main.9ccd72a4.js",
+    "main.js": "/walkorcrash/static/js/main.676a826e.js",
     "static/js/453.8d843c44.chunk.js": "/walkorcrash/static/js/453.8d843c44.chunk.js",
     "static/media/p3.png": "/walkorcrash/static/media/p3.440599fd7efb33b35e49.png",
     "static/media/p2.png": "/walkorcrash/static/media/p2.b93843f2fe7a7bcd1769.png",
@@ -100,11 +100,11 @@
     "static/media/logo1.png": "/walkorcrash/static/media/logo1.0cf4dbbecb5be68b286e.png",
     "index.html": "/walkorcrash/index.html",
     "main.688fc4b1.css.map": "/walkorcrash/static/css/main.688fc4b1.css.map",
-    "main.9ccd72a4.js.map": "/walkorcrash/static/js/main.9ccd72a4.js.map",
+    "main.676a826e.js.map": "/walkorcrash/static/js/main.676a826e.js.map",
     "453.8d843c44.chunk.js.map": "/walkorcrash/static/js/453.8d843c44.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.688fc4b1.css",
-    "static/js/main.9ccd72a4.js"
+    "static/js/main.676a826e.js"
   ]
 }
